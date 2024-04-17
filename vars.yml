@@ -1,0 +1,16 @@
+# Linux - SSH connection variables
+# Linux - Tasks variables
+
+# Windows - WinRM connection variables
+windows:
+  ansible_user:
+  ansible_password:
+  ansible_connection: winrm
+  ansible_winrm_port: 5985
+  ansible_winrm_transport: ntlm
+  ansible_winrm_server_cert_validation: ignore
+# Windows - Tasks variables
+  win_user:
+  win_password:
+  beacon_filename:
+  payload_dest:
