@@ -1,0 +1,16 @@
+[windows]
+
+[linux]
+
+[linux:vars]
+ansible_user="{{ linux.ansible_user }}"
+ansible_password="{{ linux.ansible_password }}"
+ansible_sudo_pass="{{ linux.ansible_sudo_pass }}"
+
+[windows:vars]
+ansible_user="{{ windows.ansible_user }}"
+ansible_password="{{ windows.ansible_password }}"
+ansible_connection=winrm
+ansible_winrm_port=5985
+ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore
