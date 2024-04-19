@@ -1,5 +1,6 @@
 # Project files
 roles/*/files/*
+hosts
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
