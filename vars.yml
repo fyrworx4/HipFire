@@ -14,7 +14,7 @@ lin:
 win:
   ansible_user: # domain\username
   ansible_password: 
-   # Windows - Tasks variables
+  # Windows - Tasks variables
   win_user: # The username to be used when creating new users
   win_pass: # The password to be used when creating new users
   beacon_filename: # The filename of the beacon executable stored in roles/windows/files/
