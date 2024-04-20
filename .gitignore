@@ -1,3 +1,11 @@
+# Project files
+roles/*/files/*
+hosts
+artifacts/
+artifacts/*
+hipfire/
+hipfire/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

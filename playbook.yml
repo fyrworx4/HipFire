@@ -1,0 +1,12 @@
+---
+- name: Run tasks on Windows boxes
+  hosts: win
+  roles:
+    - windows
+    - windows_cleanup
+
+- name: Run tasks on Linux boxes
+  hosts: lin
+  roles:
+    - linux
+  become: yes

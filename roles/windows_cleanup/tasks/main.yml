@@ -1,0 +1,14 @@
+---
+# Task to remove any Ansible logs generated on the remote system during task execution
+- name: Clear temp file
+  ansible.windows.win_file:
+    path: '%LOCALAPPDATA%\Temp'
+    state: absent
+  register: output
+  ignore_errors: true
+
+- name: Print output from previous task
+  ansible.builtin.debug:
+    msg: "{{ output }}"
+  tags:
+    - debug
