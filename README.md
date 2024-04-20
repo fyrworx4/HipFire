@@ -37,6 +37,13 @@ To only generate a `hosts` file:
 python3 hipfire.py -r 192.168.1-2 -w 3,4 -l 5,6 -a create
 ```
 
+You may need to install Ansible, as well as community Ansible collections:
+```bash
+ansible-galaxy collection install ansible.windows
+ansible-galaxy collection community.general
+ansible-galaxy collection community.windows
+```
+
 Full help menu:
 
 ```
