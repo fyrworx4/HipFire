@@ -11,15 +11,24 @@ def gen_ip_addr(ip_range):
             range_octet = i
             break
 
-    # determine the start and end ranges
-    start, end = map(int, octets[range_octet].split('-'))
-
-    # generate the IP addresses
     ip_addresses = []
-    for i in range(start, end + 1):
-        octets[range_octet] = str(i) # only modify the range octet
-        ip_address = '.'.join(octets)
+    if range_octet:
+        # determine the start and end ranges
+        start, end = map(int, octets[range_octet].split('-'))
 
+        # generate the IP addresses
+        for i in range(start, end + 1):
+            octets[range_octet] = str(i) # only modify the range octet
+            ip_address = '.'.join(octets)
+
+            try:
+                ipaddress.ip_address(ip_address)
+                ip_addresses.append(ip_address)
+            except ValueError:
+                print(f"Invalid IP address: {ip_address}")
+
+    else:
+        ip_address = '.'.join(octets)
         try:
             ipaddress.ip_address(ip_address)
             ip_addresses.append(ip_address)

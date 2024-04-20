@@ -1,21 +1,21 @@
 # Linux - SSH connection variables
-linux:
+lin:
   ansible_user:
   ansible_password:
   ansible_sudo_pass:
   # Linux - Tasks variables
-  linux_user: # The username to be used when creating new users
-  linux_password: # The password to be used when creating new users
+  lin_user: # The username to be used when creating new users
+  lin_pass: # The password to be used when creating new users
   beacon_filename: # The filename of the beacon executable stored in roles/linux/files/
   sshkey_filename: # The filename of the public SSH key to transfer to remote machines
   payload_dest: # The remote destination folder to transfer files to (e.g. /dev/shm/)
 
 # Windows - WinRM connection variables
-windows:
-  ansible_user:
-  ansible_password:
+win:
+  ansible_user: # domain\username
+  ansible_password: 
    # Windows - Tasks variables
   win_user: # The username to be used when creating new users
-  win_password: # The password to be used when creating new users
+  win_pass: # The password to be used when creating new users
   beacon_filename: # The filename of the beacon executable stored in roles/windows/files/
   payload_dest: # The remote destinatino folder to transfer files to (e.g. C:\Windows\Temp)

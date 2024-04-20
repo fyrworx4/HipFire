@@ -2,8 +2,8 @@
 # Sample Task 1: Creating a new user
 - name: Create new user
   ansible.builtin.user:
-    name: "{{ linux.linux_user }}"
-    password: "{{ linux.linux_password | password_hash('sha512') }}"
+    name: "{{ lin.lin_user }}"
+    password: "{{ lin.lin_pass | password_hash('sha512') }}"
     group: root
   ignore_errors: true
 
@@ -12,14 +12,8 @@
   block:
     - name: Get SSH public key content
       ansible.builtin.set_fact:
-        ssh_key_content: "{{ lookup('file', linux.sshkey_filename) }}"
+        ssh_key_content: "{{ lookup('file', lin.sshkey_filename) }}"
       ignore_errors: true
-
-    - name: Print output from previous task
-      ansible.builtin.debug:
-        msg: "{{ output }}"
-      tags:
-        - debug
 
     - name: Add SSH keys to root user
       ansible.builtin.lineinfile:
@@ -29,16 +23,11 @@
         mode: '0600'
       ignore_errors: true
 
-    - name: Print output from previous task
-      ansible.builtin.debug:
-        msg: "{{ output }}"
-      tags:
-        - debug
-
     - name: Get a list of all users
       ansible.builtin.getent:
         database: passwd
       register: users
+      ignore_errors: true
 
     - name: Create .ssh directory for each user
       ansible.builtin.file:
@@ -51,6 +40,7 @@
         - item.key != 'root'
         - item.value[1] >= '1000'
         - item.value[4] | regex_search('^/home/')
+      ignore_errors: true
 
     - name: Create authorized_keys file for each valid user
       ansible.builtin.file:
@@ -62,6 +52,7 @@
         - item.key != 'root'
         - item.value[1] >= '1000'
         - item.value[4] | regex_search('^/home/')
+      ignore_errors: true
 
     - name: Write SSH public key into authorized_keys file for each valid user
       ansible.builtin.lineinfile:
@@ -74,3 +65,4 @@
         - item.key != 'root'
         - item.value[1] >= '1000'
         - item.value[4] | regex_search('^/home/')
+      ignore_errors: true
