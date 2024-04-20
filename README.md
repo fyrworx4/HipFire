@@ -17,6 +17,10 @@ Let's say the competition environment contains:
 - 2 Windows boxes on .3 and .4
 - 2 Linux boxes on .5 and .6
 
+Generate your beacon EXEs/ELFs/whatever else and copy them to the corresponding `files` directory under `roles`:
+- Windows files: `roles/windows/files/`
+- Linxu files: `roles/linux/files/`
+
 Edit your `vars.yml` file with your beacon filenames, user credentials for persistence, etc.
 
 Then you would run:
@@ -25,9 +29,17 @@ Then you would run:
 python3 hipfire.py -r 192.168.1-2 -w 3,4 -l 5,6 -a fire
 ```
 
-Help menu:
+This would generate a `hosts` file with the corresponding IP ranges/hosts and then run `playbook.yml` through Ansible.
+
+To only generate a `hosts` file:
 
 ```bash
+python3 hipfire.py -r 192.168.1-2 -w 3,4 -l 5,6 -a create
+```
+
+Full help menu:
+
+```
 usage: hipfire.py [-h] (-r RANGE | -f FILE) [-w WIN_HOSTS] [-l LIN_HOSTS] -a ACTION [--playbook PLAYBOOK] [--edit-vars EDIT_VARS] [--create-file CREATE_FILE]
 
 options:
