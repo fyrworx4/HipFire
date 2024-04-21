@@ -1,6 +1,8 @@
 # HipFire
 Deploy pesky, perilous persistence in parallel with the help of Ansible.
 
+Check out [my blog post](https://oneoneone.one/posts/ansible-red-team/) to read more about the thoughts behind this tool!
+
 # Usage
 
 Set up Python virtual environment:
