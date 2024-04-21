@@ -1,6 +1,8 @@
 # HipFire
 Deploy pesky, perilous persistence in parallel with the help of Ansible.
 
+Check out [my blog post](https://oneoneone.one/posts/ansible-red-team/) to read more about the thoughts behind this tool!
+
 # Usage
 
 Set up Python virtual environment:
@@ -35,6 +37,13 @@ To only generate a `hosts` file:
 
 ```bash
 python3 hipfire.py -r 192.168.1-2 -w 3,4 -l 5,6 -a create
+```
+
+You may need to install Ansible, as well as community Ansible collections:
+```bash
+ansible-galaxy collection install ansible.windows
+ansible-galaxy collection community.general
+ansible-galaxy collection community.windows
 ```
 
 Full help menu:
