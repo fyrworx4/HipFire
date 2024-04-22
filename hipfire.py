@@ -116,29 +116,33 @@ def flatten(list_of_lists):
 
 
 def generate_hosts_file(ip_range, win_hosts, lin_hosts, create_file):
-    # convert win_hosts and lin_hosts to lists
-    win_hosts_list = win_hosts.split(",")
-    lin_hosts_list = lin_hosts.split(",")
-    
-    win_ips = []
-    for i in win_hosts_list:
-        win_ips.append(subknitter.gen_ip_addr(f"{ip_range}.{i}"))
-
-    lin_ips = []
-    for i in lin_hosts_list:
-        lin_ips.append(subknitter.gen_ip_addr(f"{ip_range}.{i}"))
-
-    win_ips = flatten(win_ips)
-    lin_ips = flatten(lin_ips)
-    
-    
     win_hosts_dict = {}
-    for i in win_ips:
-        win_hosts_dict[f'{i}'] = None
-
     lin_hosts_dict = {}
-    for i in lin_ips:
-        lin_hosts_dict[f'{i}'] = None
+
+    # convert win_hosts and lin_hosts to lists
+    if win_hosts:
+        win_hosts_list = win_hosts.split(",")
+        
+        win_ips = []
+        for i in win_hosts_list:
+            win_ips.append(subknitter.gen_ip_addr(f"{ip_range}.{i}"))
+
+        win_ips = flatten(win_ips)
+        
+        for i in win_ips:
+            win_hosts_dict[f'{i}'] = None
+
+    if lin_hosts:
+        lin_hosts_list = lin_hosts.split(",")
+
+        lin_ips = []
+        for i in lin_hosts_list:
+            lin_ips.append(subknitter.gen_ip_addr(f"{ip_range}.{i}"))
+
+        lin_ips = flatten(lin_ips)
+
+        for i in lin_ips:
+            lin_hosts_dict[f'{i}'] = None
 
     # configure defaults
     win_var_defaults = {
